@@ -6,9 +6,11 @@ import CustomButton from "../../components/CustomButton";
 import { Link, router } from "expo-router";
 import { useState } from "react";
 import { createUser } from "../../lib/appwrite";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 
 const SignUp = () => {
+  const { setUser } = useGlobalContext();
   const [form, setForm] = useState({
     username: "",
     email: "",
@@ -19,7 +21,7 @@ const SignUp = () => {
 
   const submit = async () => {
 
-    if (!form.username || !form.email || !form.password) {
+    if (form.username === "" || form.email === "" || form.password === "") {
       Alert.alert("Error", "Please fill all the fields");
     }
 
@@ -27,6 +29,8 @@ const SignUp = () => {
 
     try {
       const result = await createUser(form.email, form.password, form.username);
+      setUser(result)
+
       router.replace("/home");
     } catch (error) {
       Alert.alert(String(error));
@@ -36,6 +40,9 @@ const SignUp = () => {
   };
 
   return (
+    
+    
+
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
         <View className="w-full justify-center min-h-[82vh] px-4 my-6">
