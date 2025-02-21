@@ -23,11 +23,10 @@ const SignUp = () => {
       Alert.alert("Error", "Please fill all the fields");
     }
 
-    setIsSubmitting(true);
+    setIsSubmitting(true)
 
     try {
       const result = await createUser(form.email, form.password, form.username);
-
       router.replace("/home");
     } catch (error) {
       Alert.alert(String(error));
@@ -89,7 +88,7 @@ const SignUp = () => {
               href="/sign-in"
               className="text-lg font-psemibold text-secondary"
             >
-              Sign Up
+              Sign In
             </Link>
           </View>
         </View>
