@@ -11,6 +11,19 @@ export const config = {
     storageId: "67b7ea510018a286b1af",
 }
 
+
+const {
+    endpoint,
+    platform,
+    projectId,
+    databaseId,
+    userCollectionId,
+    videoCollectionId,
+    storageId
+} = config
+
+
+
 const client = new Client();
 
 client
@@ -60,7 +73,7 @@ export const createUser = async (email: string, password: string, username: stri
     }
 }
 
-export const  signIn = async (email: string, password: string) => {
+export const signIn = async (email: string, password: string) => {
     try {
         const session = await account.createEmailPasswordSession(email, password)
         return session
@@ -87,6 +100,20 @@ export const getCurrentUser = async () => {
         return currentUser.documents[0]
     } catch (error) {
         console.log(error);
+        throw new Error(String(error));
+    }
+}
+
+
+export const getAllPosts = async (title: string, description: string, videoUrl: string) => {
+    try {
+        const posts = await databases.listDocuments(
+            databaseId,
+            videoCollectionId,
+        )
+
+        return posts.documents
+    } catch (error) {
         throw new Error(String(error));
     }
 }

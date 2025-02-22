@@ -13,7 +13,7 @@ const EmrtyState = ({ title, subtitle }: EmptyStateProps) => {
         <View className=" justify-center items-center px-4">
             <Image
                 source={images.empty}
-                className=" max-w-[340px]  max-h-[215px]"
+                className=" max-w-[340px] h-[215px]"
                 resizeMode="contain"
             />
             <Text className="text-xl text-center text-white font-psemibold mt-2">
